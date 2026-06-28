@@ -4,11 +4,42 @@ Deadline: **26 Jul 2026, 23:00 GMT+2**
 
 ## 1. Kaggle notebook (required)
 
-1. Go to [competition Code tab](https://www.kaggle.com/competitions/soccer-feature-engineering-hackathon/code)
-2. **New Notebook** → R kernel → add competition data `soccer-feature-engineering-hackathon`
-3. Paste contents of `kernels/soccer-feature-engineering/soccer-hackathon-submission.R` (or upload from GitHub)
-4. **Run All** → confirm `features.csv` appears in Output (20 rows)
-5. Save version → keep notebook **Private**
+### Add competition data (step-by-step)
+
+1. Open the competition:  
+   https://www.kaggle.com/competitions/soccer-feature-engineering-hackathon
+
+2. Click the **Code** tab (top menu).
+
+3. Click **New Notebook** (top right).
+
+4. In the notebook editor, open the **Input** panel on the right:
+   - If collapsed: click **➕ Add Input** or the **Add data** button (right sidebar).
+   - Or: top menu **File → Add input**.
+
+5. Choose **Competition Data** (not “Your datasets”):
+   - Search: `soccer feature engineering`
+   - Select **Soccer Feature Engineering Hackathon**
+   - Click **Add** (or **Mount**).
+
+6. Confirm the path appears in the sidebar, e.g.:
+   ```
+   /kaggle/input/soccer-feature-engineering-hackathon/
+     └── skillcorner_opendata/
+           └── *_dynamic_events.csv
+   ```
+
+7. Set kernel to **R** (Edit → Editor type → R, if needed).
+
+8. Paste `kernels/soccer-feature-engineering/soccer-hackathon-submission.R` into a cell (or the whole script as one cell).
+
+9. **Run All** → Output should include `features.csv` (20 rows).
+
+10. **Save Version** → keep notebook **Private**.
+
+**Shortcut:** From the competition **Code** tab, some flows auto-attach data when you click “New Notebook” from that page — still verify `/kaggle/input/soccer-feature-engineering-hackathon/` exists before running.
+
+### Notebook source
 
 ## 2. Write-up (required)
 

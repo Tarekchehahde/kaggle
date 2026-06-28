@@ -1,13 +1,19 @@
 #!/usr/bin/env Rscript
 # Build features.csv for Soccer Feature Engineering Hackathon.
 
+args <- commandArgs(trailingOnly = FALSE)
+file_arg <- grep("^--file=", args, value = TRUE)
 root <- Sys.getenv("KAGGLE_REPO_ROOT", unset = "")
+if (!nzchar(root) && length(file_arg)) {
+  root <- normalizePath(
+    file.path(dirname(sub("^--file=", "", file_arg)), ".."),
+    winslash = "/"
+  )
+}
 if (!nzchar(root)) {
   root <- normalizePath(file.path(getwd(), ".."), winslash = "/")
-  if (!dir.exists(file.path(root, "R"))) {
-    root <- normalizePath(getwd(), winslash = "/")
-  }
 }
+Sys.setenv(KAGGLE_REPO_ROOT = root)
 
 source(file.path(root, "R/load_soccer_events.R"))
 source(file.path(root, "R/compute_soccer_features.R"))

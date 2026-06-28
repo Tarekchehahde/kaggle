@@ -1,0 +1,16 @@
+[Unit]
+Description=Kaggle Soccer Hackathon feature explainer (Shiny)
+After=network.target
+
+[Service]
+Type=simple
+User=rstudio
+WorkingDirectory=/opt/kaggle/shiny/soccer
+Environment=HOME=/home/rstudio
+Environment=KAGGLE_REPO_ROOT=/opt/kaggle
+ExecStart=/usr/lib/R/bin/R -e "options(shiny.url.pathPrefix='/soccer_features'); shiny::runApp('app.R', host='0.0.0.0', port=3858, launch.browser=FALSE)"
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
