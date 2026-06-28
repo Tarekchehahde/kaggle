@@ -33,6 +33,10 @@ filter_students <- function(majors, years, policies) {
     )
 }
 
+sample_rows <- function(df, k) {
+  dplyr::slice_sample(df, n = min(k, nrow(df)))
+}
+
 ui <- page_navbar(
   title = "AI Impact on Students",
   theme = theme_ai,
@@ -176,8 +180,7 @@ server <- function(input, output, session) {
   })
 
   output$plot_gpa_scatter <- renderPlotly({
-    df <- filtered() |>
-      slice_sample(n = min(4000L, n()))
+    df <- sample_rows(filtered(), 4000L)
 
     p <- ggplot(df, aes(Weekly_GenAI_Hours, GPA_Delta, color = Burnout_Risk_Level)) +
       geom_point(alpha = 0.25, size = 1.2) +
@@ -277,11 +280,11 @@ server <- function(input, output, session) {
       group_by(Perceived_AI_Dependency) |>
       summarise(
         mean_retention = mean(Skill_Retention_Score, na.rm = TRUE),
-        n = n(),
+        n_students = dplyr::n(),
         .groups = "drop"
       )
 
-    p <- ggplot(df, aes(Perceived_AI_Dependency, mean_retention, size = n)) +
+    p <- ggplot(df, aes(Perceived_AI_Dependency, mean_retention, size = n_students)) +
       geom_point(color = "#6366f1", alpha = 0.85) +
       geom_smooth(method = "loess", se = TRUE, color = "#334155", linewidth = 0.8) +
       labs(
@@ -295,8 +298,7 @@ server <- function(input, output, session) {
   })
 
   output$plot_anxiety <- renderPlotly({
-    df <- filtered() |>
-      slice_sample(n = min(3000L, n()))
+    df <- sample_rows(filtered(), 3000L)
 
     p <- ggplot(df, aes(Weekly_GenAI_Hours, Anxiety_Level_During_Exams, color = Burnout_Risk_Level)) +
       geom_point(alpha = 0.2, size = 1.2) +
