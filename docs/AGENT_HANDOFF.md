@@ -69,8 +69,19 @@ GitHub: https://github.com/Tarekchehahde/kaggle
 | Fetch | `scripts/fetch-ai-impact-on-students.sh` |
 | Deploy | `scripts/deploy-vps.sh` |
 | systemd | `systemd/kaggle-ai-impact-students.service` |
-| Kaggle notebook bundle | `kernels/ai-impact-students/` |
 | Live URL | http://82.165.167.86/ai_impact_students/ |
+
+### Titanic (competition)
+
+| Item | Location |
+|------|----------|
+| Dataset doc | `docs/datasets/titanic.md` |
+| Loader | `R/load_titanic.R` |
+| Shiny app | `shiny/titanic/app.R` |
+| Fetch | `scripts/fetch-titanic.sh` |
+| Deploy | `scripts/deploy-titanic-vps.sh` |
+| systemd | `systemd/kaggle-titanic.service` |
+| Live URL | http://82.165.167.86/titanic/ |
 
 ---
 

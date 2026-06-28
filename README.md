@@ -4,17 +4,15 @@ Standalone project: **Kaggle datasets → R analysis → Shiny dashboards** on a
 
 This repo is **independent** of MaStR, transtek, and other workspaces.
 
-## Current solution
+## Solutions
 
-**[Impact of AI on Students](https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students)** — interactive Shiny dashboard.
+| Dataset | Local run | Live VPS |
+|---------|-----------|----------|
+| [AI on students](https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students) | `Rscript run_app.R` | http://82.165.167.86/ai_impact_students/ |
+| [Titanic](https://www.kaggle.com/c/titanic) | `Rscript run_titanic.R` | http://82.165.167.86/titanic/ |
 
-| Step | Command |
-|------|---------|
-| Fetch data | `bash scripts/fetch-ai-impact-on-students.sh` |
-| Install R packages | `Rscript scripts/install_packages.R` |
-| Run dashboard | `Rscript run_app.R` |
-
-Full write-up: [`docs/SOLUTION.md`](docs/SOLUTION.md)
+Fetch: `bash scripts/fetch-ai-impact-on-students.sh` · `bash scripts/fetch-titanic.sh`  
+Deploy: `bash scripts/deploy-vps.sh` · `bash scripts/deploy-titanic-vps.sh`
 
 ## Repo layout
 
