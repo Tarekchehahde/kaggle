@@ -31,6 +31,7 @@ kaggle/
 
 | Path | Purpose |
 |------|---------|
+| [`docs/AGENT_HANDOFF.md`](docs/AGENT_HANDOFF.md) | **Start here** — copy-paste prompt for a new agent |
 | [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | How we pick a dataset and when to script |
 | [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Mac, VPS, Kaggle CLI |
 | [`docs/CREDENTIALS.md`](docs/CREDENTIALS.md) | Tokens (never in git) |
