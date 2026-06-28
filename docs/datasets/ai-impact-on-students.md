@@ -11,7 +11,8 @@
 | **Rows** | 50,000 |
 | **Columns** | 16 |
 | **Missing values** | None (per publisher) |
-| **Status** | Documented — **not downloaded yet** |
+| **Status** | Fetched locally; Shiny solution in `shiny/app.R` |
+| **Local CSV** | `data/laveshjadon/ai-impact-on-students/*.csv` (gitignored) |
 
 ## Subtitle
 

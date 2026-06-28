@@ -2,32 +2,49 @@
 
 Standalone project: **Kaggle datasets → R analysis → Shiny dashboards** on a self-hosted RStudio VPS, orchestrated with Cursor.
 
-This repo is **independent** of MaStR, transtek, and other workspaces. It only documents and (later) automates the Kaggle pipeline.
+This repo is **independent** of MaStR, transtek, and other workspaces.
 
-## What lives here
+## Current solution
+
+**[Impact of AI on Students](https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students)** — interactive Shiny dashboard.
+
+| Step | Command |
+|------|---------|
+| Fetch data | `bash scripts/fetch-ai-impact-on-students.sh` |
+| Install R packages | `Rscript scripts/install_packages.R` |
+| Run dashboard | `Rscript run_app.R` |
+
+Full write-up: [`docs/SOLUTION.md`](docs/SOLUTION.md)
+
+## Repo layout
+
+```
+kaggle/
+├── R/                 # load_ai_students.R, summarize_ai_students.R
+├── shiny/app.R        # dashboard
+├── scripts/           # fetch, install_packages
+├── docs/              # workflow, architecture, datasets
+└── data/              # gitignored — downloaded CSVs
+```
+
+## Documentation
 
 | Path | Purpose |
 |------|---------|
-| [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | How we pick a dataset, what you send, what gets built |
-| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Mac, VPS, Kaggle CLI, Shiny — technical layout |
-| [`docs/CREDENTIALS.md`](docs/CREDENTIALS.md) | Where API tokens go (never in git) |
-| [`docs/datasets/`](docs/datasets/) | One note per dataset you choose |
-
-## Current pilot dataset
-
-**[Impact of AI on Students](https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students)** — `laveshjadon/ai-impact-on-students`
-
-See [`docs/datasets/ai-impact-on-students.md`](docs/datasets/ai-impact-on-students.md).
+| [`docs/WORKFLOW.md`](docs/WORKFLOW.md) | How we pick a dataset and when to script |
+| [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) | Mac, VPS, Kaggle CLI |
+| [`docs/CREDENTIALS.md`](docs/CREDENTIALS.md) | Tokens (never in git) |
+| [`docs/SOLUTION.md`](docs/SOLUTION.md) | AI-on-students dashboard |
+| [`docs/datasets/`](docs/datasets/) | Per-dataset notes |
 
 ## Status
 
-- [x] Kaggle CLI + token on Mac and IONOS VPS (`rstudio` user)
-- [x] Workflow and architecture documented
-- [ ] Fetch / ETL scripts (waiting for explicit go-ahead)
-- [ ] R analysis + Shiny app
-- [ ] VPS deploy
+- [x] Kaggle CLI + token on Mac and VPS
+- [x] Dataset fetched (local; not in git)
+- [x] R loader + Shiny dashboard
+- [ ] VPS deploy (systemd/nginx)
 
-## Quick links
+## Links
 
-- Kaggle dataset: https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students
-- VPS hub (separate project): [shiny-dashboard-hub](https://github.com/Tarekchehahde/shiny-dashboard-hub)
+- GitHub: https://github.com/Tarekchehahde/kaggle
+- Dataset: https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students
