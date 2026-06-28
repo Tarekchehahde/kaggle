@@ -1,0 +1,31 @@
+# Kaggle credentials — never commit
+.kaggle/
+**/kaggle.env
+**/.env
+*.credentials.local.md
+
+# Downloaded data — fetch locally or on VPS, not in git
+/data/
+/data-raw/
+/data/kaggle/
+*.csv
+*.parquet
+*.zip
+
+# R / Python artifacts
+.Rhistory
+.RData
+.Rproj.user/
+renv/library/
+renv/local/
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+logs/*.log
