@@ -1,0 +1,79 @@
+---
+title: "AI Impact On Students Solution"
+output: html_notebook
+---
+
+```{r setup, message=FALSE, warning=FALSE}
+suppressPackageStartupMessages({
+  library(dplyr)
+  library(ggplot2)
+  library(readr)
+})
+
+find_csv <- function() {
+  hits <- list.files("/kaggle/input", pattern = "\\.csv$", recursive = TRUE, full.names = TRUE)
+  if (length(hits) == 0L) stop("Attach laveshjadon/ai-impact-on-students")
+  hits[[1L]]
+}
+
+raw <- read_csv(find_csv(), show_col_types = FALSE)
+df <- raw |>
+  mutate(
+    GPA_Delta = Post_Semester_GPA - Pre_Semester_GPA,
+    Burnout_Risk_Level = factor(Burnout_Risk_Level, levels = c("Low", "Medium", "High")),
+    Institutional_Policy = factor(Institutional_Policy),
+    Major_Category = factor(Major_Category)
+  )
+```
+
+## Solution summary
+
+Interactive Shiny dashboard (full solution): GitHub `Tarekchehahde/kaggle` — live at http://82.165.167.86/ai_impact_students/
+
+```{r metrics}
+cat("Rows:", nrow(df), "\n")
+cat("Median GPA change:", round(median(df$GPA_Delta, na.rm = TRUE), 3), "\n")
+cat("High burnout %:", round(mean(df$Burnout_Risk_Level == "High", na.rm = TRUE) * 100, 1), "\n")
+```
+
+## Burnout by policy
+
+```{r policy, fig.width=8, fig.height=4}
+df |>
+  count(Institutional_Policy, Burnout_Risk_Level) |>
+  group_by(Institutional_Policy) |>
+  mutate(pct = n / sum(n)) |>
+  ggplot(aes(Institutional_Policy, pct, fill = Burnout_Risk_Level)) +
+  geom_col() +
+  scale_fill_manual(values = c(Low = "#10b981", Medium = "#f59e0b", High = "#ef4444")) +
+  labs(x = NULL, y = "Share", fill = "Burnout") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+## GPA change by policy
+
+```{r gpa, fig.width=8, fig.height=4}
+df |>
+  group_by(Institutional_Policy) |>
+  summarise(mean_delta = mean(GPA_Delta, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(reorder(Institutional_Policy, mean_delta), mean_delta)) +
+  geom_col(fill = "#6366f1") +
+  geom_hline(yintercept = 0, linetype = "dashed") +
+  labs(x = NULL, y = "Mean GPA change") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+```
+
+## GenAI hours by major
+
+```{r major, fig.width=7, fig.height=4}
+df |>
+  group_by(Major_Category) |>
+  summarise(mean_genai = mean(Weekly_GenAI_Hours, na.rm = TRUE), .groups = "drop") |>
+  ggplot(aes(reorder(Major_Category, mean_genai), mean_genai)) +
+  geom_col(fill = "#818cf8") +
+  coord_flip() +
+  labs(x = NULL, y = "Mean weekly GenAI hours") +
+  theme_minimal()
+```

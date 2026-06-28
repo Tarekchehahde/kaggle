@@ -2,8 +2,12 @@
 
 suppressPackageStartupMessages({
   library(dplyr)
-  library(readr)
 })
+
+#' Read CSV with consistent UTF-8 handling (base R — no readr on VPS R 4.6).
+.read_students_csv <- function(path) {
+  read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)
+}
 
 .is_kaggle_repo <- function(d) {
   dir.exists(file.path(d, "R")) && dir.exists(file.path(d, "data"))
@@ -46,7 +50,7 @@ ai_students_csv_path <- function(root = ai_students_repo_root()) {
 #' Read and type-coerce the student impact dataset.
 load_ai_students <- function(root = ai_students_repo_root()) {
   path <- ai_students_csv_path(root)
-  raw <- readr::read_csv(path, show_col_types = FALSE, progress = FALSE)
+  raw <- .read_students_csv(path)
 
   raw |>
     mutate(

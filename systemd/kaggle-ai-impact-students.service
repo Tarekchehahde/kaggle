@@ -1,0 +1,16 @@
+[Unit]
+Description=Kaggle solution — AI Impact on Students Shiny dashboard
+After=network.target
+
+[Service]
+Type=simple
+User=rstudio
+WorkingDirectory=/opt/kaggle/shiny
+Environment=HOME=/home/rstudio
+Environment=KAGGLE_REPO_ROOT=/opt/kaggle
+ExecStart=/usr/lib/R/bin/R -e "options(shiny.url.pathPrefix='/ai_impact_students'); shiny::runApp('app.R', host='0.0.0.0', port=3856, launch.browser=FALSE)"
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

@@ -37,12 +37,31 @@ kaggle/
 | [`docs/SOLUTION.md`](docs/SOLUTION.md) | AI-on-students dashboard |
 | [`docs/datasets/`](docs/datasets/) | Per-dataset notes |
 
+VPS deploy (systemd + nginx):
+
+```bash
+bash scripts/deploy-vps.sh
+```
+
+**Live:** http://82.165.167.86/ai_impact_students/
+
+## Kaggle kernel
+
+R script kernel in `kernels/ai-impact-students/` — push with:
+
+```bash
+cd kernels/ai-impact-students && kaggle kernels push -p .
+```
+
+Profile: https://www.kaggle.com/tarekchehade/code (after push succeeds)
+
 ## Status
 
 - [x] Kaggle CLI + token on Mac and VPS
-- [x] Dataset fetched (local; not in git)
+- [x] Dataset fetched (local + VPS; not in git)
 - [x] R loader + Shiny dashboard
-- [ ] VPS deploy (systemd/nginx)
+- [x] VPS deploy at `/ai_impact_students/`
+- [ ] Kaggle kernel push via API (403 — use [`docs/KAGGLE_KERNEL.md`](docs/KAGGLE_KERNEL.md) manual import)
 
 ## Links
 

@@ -1,6 +1,6 @@
 # One-time (or after R upgrade): install packages for load + Shiny app.
 pkgs <- c(
-  "shiny", "bslib", "dplyr", "readr", "tidyr", "ggplot2",
+  "shiny", "bslib", "dplyr", "tidyr", "ggplot2",
   "plotly", "scales", "DT"
 )
 install_if_missing <- function(p) {

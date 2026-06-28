@@ -42,15 +42,23 @@ Rscript run_app.R
 
 Requires Kaggle token in `~/.kaggle/access_token` for fetch only.
 
-## Run on VPS (manual)
+## Run on VPS
+
+**Live URL:** http://82.165.167.86/ai_impact_students/
+
+Deploy (from Mac):
+
+```bash
+bash scripts/deploy-vps.sh
+```
+
+Manual steps:
 
 ```bash
 ssh ionos-mastr
-sudo mkdir -p /opt/kaggle && sudo chown rstudio:rstudio /opt/kaggle
-# clone repo as rstudio, fetch data on server, install packages, run on a free port
+# code at /opt/kaggle, service kaggle-ai-impact-students, port 3856
+sudo systemctl status kaggle-ai-impact-students
 ```
-
-VPS systemd/nginx deploy is a follow-up step — not wired yet.
 
 ## Data notes
 
