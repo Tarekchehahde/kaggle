@@ -7,20 +7,51 @@ suppressPackageStartupMessages({
 
 # --- paths (Kaggle competition input) ----------------------------------------
 find_events_dir <- function() {
-  candidates <- c(
+  static <- c(
     "/kaggle/input/soccer-feature-engineering-hackathon/skillcorner_opendata",
+    "/kaggle/input/soccer-feature-engineering-hackathon",
     "data/soccer-hackathon/skillcorner_opendata"
   )
-  for (d in candidates) {
-    if (dir.exists(d) && length(list.files(d, pattern = "_dynamic_events\\.csv$")) > 0L) {
-      return(d)
+  for (d in static) {
+    if (!dir.exists(d)) next
+    flat <- list.files(d, pattern = "_dynamic_events\\.csv$", full.names = TRUE)
+    if (length(flat) > 0L) return(d)
+    nested <- list.files(
+      d, pattern = "_dynamic_events\\.csv$", recursive = TRUE, full.names = TRUE
+    )
+    if (length(nested) > 0L) return(dirname(nested[[1L]]))
+  }
+  if (dir.exists("/kaggle/input")) {
+    nested <- list.files(
+      "/kaggle/input",
+      pattern = "_dynamic_events\\.csv$",
+      recursive = TRUE,
+      full.names = TRUE
+    )
+    if (length(nested) > 0L) {
+      dirs <- unique(dirname(nested))
+      counts <- sort(table(dirs), decreasing = TRUE)
+      return(names(counts)[[1L]])
     }
+    cat("DEBUG /kaggle/input:\n")
+    print(list.dirs("/kaggle/input", recursive = TRUE))
   }
   stop("Attach competition data: soccer-feature-engineering-hackathon")
 }
 
+find_event_files <- function() {
+  base <- find_events_dir()
+  sort(list.files(
+    base,
+    pattern = "_dynamic_events\\.csv$",
+    recursive = TRUE,
+    full.names = TRUE
+  ))
+}
+
 events_dir <- find_events_dir()
-event_files <- sort(list.files(events_dir, pattern = "_dynamic_events\\.csv$", full.names = TRUE))
+event_files <- find_event_files()
+cat("Events dir:", events_dir, "\n")
 cat("Matches found:", length(event_files), "\n")
 
 # --- helpers (same as repo R/compute_soccer_features.R) ----------------------
