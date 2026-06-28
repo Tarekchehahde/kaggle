@@ -10,9 +10,10 @@ This repo is **independent** of MaStR, transtek, and other workspaces.
 |---------|-----------|----------|
 | [AI on students](https://www.kaggle.com/datasets/laveshjadon/ai-impact-on-students) | `Rscript run_app.R` | http://82.165.167.86/ai_impact_students/ |
 | [Titanic](https://www.kaggle.com/c/titanic) | `Rscript run_titanic.R` | http://82.165.167.86/titanic/ |
+| **[Soccer Hackathon](https://www.kaggle.com/competitions/soccer-feature-engineering-hackathon)** | `Rscript scripts/build-soccer-features.R` | Submit writeup + notebook (see below) |
 
-Fetch: `bash scripts/fetch-ai-impact-on-students.sh` · `bash scripts/fetch-titanic.sh`  
-Deploy: `bash scripts/deploy-vps.sh` · `bash scripts/deploy-titanic-vps.sh`
+Fetch: `bash scripts/fetch-soccer-hackathon.sh`  
+Submit: [`docs/soccer/SUBMISSION_CHECKLIST.md`](docs/soccer/SUBMISSION_CHECKLIST.md)
 
 ## Repo layout
 
